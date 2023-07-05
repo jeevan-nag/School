@@ -14,16 +14,30 @@ const parent = sequelize.define('parents', {
   },
   fatherName: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    validate:{
+      isAlpha: true
+    }
   },
   motherName: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    validate:{
+      isAlpha: true
+    }
   },
   emergencyContact: {
     type: DataTypes.DECIMAL,
-    allowNull: false
+    allowNull: false,
+    unique: true,
+    validate:{
+      isNumeric:true,
+      max: 10,
+      min: 10
+    },
   }
+},{
+  timestamps: false
 });
 
 module.exports = { parent };

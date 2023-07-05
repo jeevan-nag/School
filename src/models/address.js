@@ -1,7 +1,6 @@
 
-const {DataTypes} = require('sequelize')
-const {sequelize} = require("../../database/dbconnection")
-const {student} = require("./student")
+const {DataTypes} = require('sequelize');
+const {sequelize} = require("../../database/dbconnection");
 
 const address = sequelize.define("address", {
     id: {
@@ -19,24 +18,41 @@ const address = sequelize.define("address", {
     },
     area: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate:{
+            isAlphanumeric:true
+        }
     },
     taluk: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate:{
+            isAlpha: true
+        }
     },
     district: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate:{
+            isAlpha:true
+        }
     },
     state: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate:{
+            isAlpha: true
+        }
     },
     pincode : {
         type: DataTypes.DECIMAL,
-        allowNull: false
+        allowNull: false,
+        validate:{
+            isNumeric: true,           
+        }
     }
+ },{
+    timestamps: false // createdAt , updatedAt will not be created
  });
 
  module.exports = {address}

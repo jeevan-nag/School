@@ -1,14 +1,18 @@
 const express = require('express');
 const app = express();
 const {sequelize} = require('./src/models/index');
-const {router:studentRouter} = require('./src/api/student')
+const {router:studentRouter} = require('./src/router/student');
+const {router:subjectRouter} = require('./src/router/subject');
+const {router:studentActivity} = require("./src/router/activities");
 
 app.use(express.json());
 app.get('/', (req, res) => {
   return res.status(200).send("Hey NodeJS")
 })
 
-app.use(studentRouter)
+app.use(studentRouter);
+app.use(subjectRouter);
+app.use(studentActivity);
 
 
 //Global Erorr Handling

@@ -12,15 +12,27 @@ const student = sequelize.define("students", {
     },
     studentName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        validate:{
+            isAlpha:true
+        }
     },
     DOB: {
         type: DataTypes.STRING,
+        allowNull: false,
+        validate:{
+            isDate:true
+        }
+    },
+    optionalSubjectId: {
+        type: DataTypes.UUID,
         allowNull: false
     }
  });
 
-student.hasOne(parent, { foreignKey: 'studentId' });
+//One-One Association
+
+student.hasOne(parent, { foreignKey: 'studentId'}); 
 student.hasOne(address, { foreignKey: 'studentId' });
 parent.belongsTo(student, { foreignKey: 'studentId' });
 address.belongsTo(student, {foreignKey: 'studentId'});
