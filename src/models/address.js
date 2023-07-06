@@ -19,30 +19,18 @@ const address = sequelize.define("address", {
     area: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate:{
-            isAlphanumeric:true
-        }
     },
     taluk: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate:{
-            isAlpha: true
-        }
     },
     district: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate:{
-            isAlpha:true
-        }
     },
     state: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate:{
-            isAlpha: true
-        }
     },
     pincode : {
         type: DataTypes.DECIMAL,

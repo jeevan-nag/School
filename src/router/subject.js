@@ -5,12 +5,14 @@ const {sequelize} = require("../../database/dbconnection")
 router.use(express.json());
 
 router.post("/addOptionalSubject", async(req, res) => {
-    const data = [{name:"Zoology"}, {name:"Agriculture"},{name:"Horiculture"}]
+    // creating the bulk the data same time
+    // const data = [{name:"Zoology"}, {name:"Agriculture"},{name:"Horiculture"}]
     try {
-        const optionalSubjectData = await optionalSubject.bulkCreate(data, {validator:true})
-        return res.status(200).send({message:"Success", data:optionalSubjectData})
+        const { subjects} = req.body;
+        const optionalSubjectData = await optionalSubject.bulkCreate(subjects.map(value => ({name:value}), {validator:true}));
+        return res.status(200).send({message:"success", data:optionalSubjectData})
     } catch (error) {
-        return res.status(400).send({Success: false, error})
+        return res.status(400).send({success: false, error})
     }  
 })
 

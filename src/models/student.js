@@ -31,10 +31,10 @@ const student = sequelize.define("students", {
  });
 
 //One-One Association
-
-student.hasOne(parent, { foreignKey: 'studentId'}); 
-student.hasOne(address, { foreignKey: 'studentId' });
-parent.belongsTo(student, { foreignKey: 'studentId' });
-address.belongsTo(student, {foreignKey: 'studentId'});
+// onDelete: 'cascade' and hooks: true the associate table data also will be deleted 
+student.hasOne(parent, { foreignKey: 'studentId', onDelete:'cascade', hooks:true});
+student.hasOne(address, { foreignKey: 'studentId',  onDelete:'cascade', hooks:true });
+parent.belongsTo(student, { foreignKey: 'studentId',  onDelete:'cascade', hooks:true });
+address.belongsTo(student, {foreignKey: 'studentId',  onDelete:'cascade', hooks:true});
 
 module.exports = {student};

@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../../database/dbconnection');
-const { student } = require('./student');
 
 const parent = sequelize.define('parents', {
   id: {
@@ -16,14 +15,20 @@ const parent = sequelize.define('parents', {
     type: DataTypes.STRING,
     allowNull: false,
     validate:{
-      isAlpha: true
+      isAlpha:{
+        args: true,
+        msg: "Father Name should contain only letters"
+      }
     }
   },
   motherName: {
     type: DataTypes.STRING,
     allowNull: false,
     validate:{
-      isAlpha: true
+      isAlpha:{
+        args:true,
+        msg: "Mother Name should contain only letters"
+      },
     }
   },
   emergencyContact: {
@@ -32,8 +37,10 @@ const parent = sequelize.define('parents', {
     unique: true,
     validate:{
       isNumeric:true,
-      max: 10,
-      min: 10
+      min:{
+        args: [10],
+        msg: "Invalid Emergency contact number"
+      }
     },
   }
 },{

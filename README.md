@@ -10,7 +10,6 @@ Database targetted is MySQL, using an ORM wrapper - Sequelize.js and sequelize.
 
 # configuration
 An env file is required for database configuration
-
 # Concept : SCHOOL, STUDENT, Optional_Subject, Extracurricular_Activities
 
 1. ONE-ONE Association : Each student will have an Address & Parents_info 

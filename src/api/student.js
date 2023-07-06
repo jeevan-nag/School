@@ -11,7 +11,7 @@ router.post("/addStudent", async(req, res)=>{
         await parent.create({ studentId : addStudent.id, ...req.body.parentDetails }, { transaction: t });
         await address.create({ studentId:addStudent.id, ...req.body.address}, { transaction: t })
         await t.commit();
-        return res.status(200).send({message:'Success', data: {id:addStudent.id, ...req.body} });
+        return res.status(200).send({message:'success', data: {id:addStudent.id, ...req.body} });
     } catch (error) {
         await t.rollback();
         return res.status(400).send({success:'false', error});
@@ -28,7 +28,7 @@ router.patch("/updateStudent", async(req, res) => {
         await parent.update({...req.body.parentDetails}, {where: {studentId: req.body.id}} , { transaction: t });
         await address.update({...req.body.address}, {where: {studentId: req.body.id}} , { transaction: t });
         await t.commit();
-        return res.status(200).send({message:'Success', data: await student.findOne({ where: { id: req.body.id },include:[{model:parent}, {model:address}] }) })
+        return res.status(200).send({message:'success', data: await student.findOne({ where: { id: req.body.id },include:[{model:parent}, {model:address}] }) })
     } catch (error) {
         await t.rollback();
         return res.status(400).send({message:"Erorr", error });
@@ -38,7 +38,7 @@ router.patch("/updateStudent", async(req, res) => {
 router.get("/getStudents", async(req, res) =>{
     try {
         const getStudents = await student.findAll({include:[{model:parent},{model:address}]});
-        return res.status(200).send({message:'Success', data:getStudents});
+        return res.status(200).send({message:'success', data:getStudents});
     } catch (error) {
         return res.status(400).send({message:"Erorr", error });
     }
@@ -50,7 +50,7 @@ router.get("/getStudent/:id" , async(req, res) =>{
             return res.status(200).send({message:"missing id"});
         }
         const getStudentId = await student.findOne({where:{id: req.params.id}, include:[{model:parent},{model:address}] });
-        return res.status(200).send({message:'Success', data:getStudentId});
+        return res.status(200).send({message:'success', data:getStudentId});
     } catch (error) {
         return res.status(400).send({message:"Erorr", error });
     }
@@ -62,7 +62,7 @@ router.delete("/deleteStudent/:id", async(req, res) => {
             return res.status(200).send({message:"missing id"});
         }
         await student.destroy({where:{id: req.params.id}});
-        return res.status(200).send({message:'Success', data:"Deleted successfully "});
+        return res.status(200).send({message:'success', data:"Deleted successfully "});
     } catch (error) {
         return res.status(400).send({message:"Erorr", error });
     }
